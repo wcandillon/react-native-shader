@@ -1,12 +1,23 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
-import ShaderViewManager from 'react-native-shader';
+import { StyleSheet, View, Dimensions } from 'react-native';
+import SkiaViewManager from 'react-native-shader';
+
+const { width } = Dimensions.get('window');
+
+const hue = `
+void main() {
+  gl_FragColor = vec4(v_tex_coord.x, v_tex_coord.y, 0.5 + 0.5 * cos(u_time * 1000 / 500.0), 1.0);
+}`;
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ShaderViewManager color="#32a852" style={styles.box} />
+      <SkiaViewManager
+        source={hue}
+        uniforms={{ blue: 0, opacity: 0.5 }}
+        style={styles.box}
+      />
     </View>
   );
 }
@@ -18,8 +29,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: 60,
-    height: 60,
+    width: width,
+    height: width,
     marginVertical: 20,
   },
 });

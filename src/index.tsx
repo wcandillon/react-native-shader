@@ -1,12 +1,11 @@
 import { requireNativeComponent, ViewStyle } from 'react-native';
 
-type ShaderProps = {
-  color: string;
+type SkiaProps = {
+  source: string;
+  uniforms: object;
   style: ViewStyle;
 };
 
-export const ShaderViewManager = requireNativeComponent<ShaderProps>(
-'ShaderView'
-);
+export const SkiaViewManager = requireNativeComponent<SkiaProps>('SkiaView');
 
-export default ShaderViewManager;
+export default SkiaViewManager;
