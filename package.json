@@ -1,6 +1,6 @@
 {
   "name": "react-native-shader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React Native Shader Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
