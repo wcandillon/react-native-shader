@@ -6,7 +6,9 @@ import Shader from 'react-native-shader';
 const { width } = Dimensions.get('window');
 
 const hue = `
+precision mediump float;
 varying vec2 v_tex_coord;
+
 void main() {
   gl_FragColor = vec4(v_tex_coord.x, v_tex_coord.y, 1.0, 1.0);
 }`;

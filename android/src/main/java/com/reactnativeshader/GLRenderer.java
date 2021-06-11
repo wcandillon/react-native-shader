@@ -17,11 +17,17 @@ import android.util.Log;
 public class GLRenderer implements GLSurfaceView.Renderer {
   private static final String TAG = "GLRenderer";
   private Shader mShader;
+  private String mSource;
+
+  GLRenderer(String source){
+    mSource = source;
+  }
+
   @Override
   public void onSurfaceCreated(GL10 unused, EGLConfig config) {
     // Set the background frame color
     GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    mShader = new Shader();
+    mShader = new Shader(mSource);
   }
   @Override
   public void onDrawFrame(GL10 unused) {

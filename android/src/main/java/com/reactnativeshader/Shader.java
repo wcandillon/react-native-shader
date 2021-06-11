@@ -15,18 +15,10 @@ public class Shader {
       "attribute vec4 aPosition;" +
       "varying vec2 v_tex_coord;" +
       "void main() {" +
-      // the matrix must be included as a modifier of gl_Position
-      // Note that the uMVPMatrix factor *must be first* in order
-      // for the matrix multiplication product to be correct.
       "  gl_Position = aPosition;" +
       "v_tex_coord = vec2((aPosition.x + 1.0) / 2.0, (aPosition.y + 1.0) / 2.0);" +
       "}";
-  private final String fragmentShaderCode =
-    "precision mediump float;" +
-    "varying vec2 v_tex_coord;" +
-      "void main() {" +
-      "  gl_FragColor = vec4(v_tex_coord.x, v_tex_coord.y, 1.0, 1.0);" +
-      "}";
+
   private final int mProgram;
   private int mPositionHandle;
 
@@ -46,13 +38,13 @@ public class Shader {
   /**
    * Sets up the drawing object data for use in an OpenGL ES context.
    */
-  public Shader() {
+  public Shader(String source) {
 
     // prepare shaders and OpenGL program
     int vertexShader = GLRenderer.loadShader(
       GLES20.GL_VERTEX_SHADER, vertexShaderCode);
     int fragmentShader = GLRenderer.loadShader(
-      GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
+      GLES20.GL_FRAGMENT_SHADER, source);
     mProgram = GLES20.glCreateProgram();             // create empty OpenGL Program
     GLES20.glAttachShader(mProgram, vertexShader);   // add the vertex shader to program
     GLES20.glAttachShader(mProgram, fragmentShader); // add the fragment shader to program

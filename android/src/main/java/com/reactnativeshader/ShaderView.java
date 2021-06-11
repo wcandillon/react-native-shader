@@ -7,12 +7,13 @@ import com.facebook.react.bridge.ReadableMap;
 
 public class ShaderView extends GLSurfaceView {
 
-  private final GLRenderer renderer;
-  private String shader;
+  private GLRenderer renderer;
   private ReadableMap uniforms;
 
-  public void setShader(String shader) {
-    this.shader = shader;
+  public void setSource(String source) {
+    renderer = new GLRenderer(source);
+    // Set the Renderer for drawing on the GLSurfaceView
+    setRenderer(renderer);
   }
 
   public void setUniforms(ReadableMap uniforms) {
@@ -25,9 +26,6 @@ public class ShaderView extends GLSurfaceView {
     // Create an OpenGL ES 2.0 context
     setEGLContextClientVersion(2);
 
-    renderer = new GLRenderer();
-    // Set the Renderer for drawing on the GLSurfaceView
-    setRenderer(renderer);
   }
 
 }
