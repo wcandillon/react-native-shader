@@ -10,7 +10,7 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-public class ShaderViewManager extends SimpleViewManager<View> {
+public class ShaderViewManager extends SimpleViewManager<ShaderView> {
     public static final String REACT_CLASS = "ShaderView";
 
     @Override
@@ -21,8 +21,8 @@ public class ShaderViewManager extends SimpleViewManager<View> {
 
     @Override
     @NonNull
-    public View createViewInstance(ThemedReactContext reactContext) {
-        return new View(reactContext);
+    public ShaderView createViewInstance(ThemedReactContext reactContext) {
+        return new ShaderView(reactContext);
     }
 
     @ReactProp(name = "shader")
@@ -32,6 +32,6 @@ public class ShaderViewManager extends SimpleViewManager<View> {
 
     @ReactProp(name = "uniforms")
     public void setUniforms(View view, ReadableMap uniforms) {
-        view.setBackgroundColor(Color.parseColor("red"));
+        //view.setBackgroundColor(Color.parseColor("red"));
     }
 }
