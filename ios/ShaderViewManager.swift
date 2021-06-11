@@ -1,11 +1,11 @@
 import Foundation
 import SpriteKit
 
-@objc(SkiaViewManager)
-class SkiaViewManager: RCTViewManager {
+@objc(ShaderViewManager)
+class ShaderViewManager: RCTViewManager {
 
-  override func view() -> (SkiaView) {
-    return SkiaView()
+  override func view() -> (ShaderView) {
+    return ShaderView()
   }
 }
 
@@ -18,7 +18,7 @@ class ShaderScene: SKScene {
     }
 }
 
-class SkiaView : SKView {
+class ShaderView : SKView {
     
     var shader: SKShader?;
 
