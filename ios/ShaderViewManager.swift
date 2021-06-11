@@ -20,14 +20,24 @@ class ShaderScene: SKScene {
 
 class ShaderView : SKView {
     
-    var shader: SKShader?;
+    var shaderScene: ShaderScene?;
 
     @objc var source: String = "" {
         didSet {
         }
     }
     
-    @objc var uniforms: Dictionary<String, NSNumber> = [:]
+    @objc var uniforms: Dictionary<String, NSNumber> = [:] {
+        didSet {
+            if (self.scene != nil) {
+                
+                for (key, value) in self.uniforms {
+                    self.shaderScene?.shader?.uniforms.append(SKUniform(name: key, float: value.floatValue));
+                }
+                self.presentScene(self.shaderScene);
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,15 +49,14 @@ class ShaderView : SKView {
   
     override var bounds: CGRect {
         didSet {
-            let scene = ShaderScene(size: self.frame.size);
-            print(self.source);
+            self.shaderScene = ShaderScene(size: self.frame.size);
             let shader = SKShader(source: self.source);
 
             for (key, value) in self.uniforms {
                 shader.uniforms.append(SKUniform(name: key, float: value.floatValue));
             }
-            scene.shader = shader;
-            self.presentScene(scene);
+            self.shaderScene?.shader = shader;
+            self.presentScene(self.shaderScene);
         }
     }
 }

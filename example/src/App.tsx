@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { StyleSheet, View, Dimensions } from 'react-native';
 import Shader from 'react-native-shader';
@@ -11,9 +11,16 @@ void main() {
 }`;
 
 export default function App() {
+  const [blue, setBlue] = useState(1);
+  useEffect(() => {
+    setTimeout(() => {
+      setBlue(0);
+      console.log('DONE');
+    }, 2000);
+  }, []);
   return (
     <View style={styles.container}>
-      <Shader source={hue} uniforms={{ blue: 1 }} style={styles.box} />
+      <Shader source={hue} uniforms={{ blue }} style={styles.box} />
     </View>
   );
 }
