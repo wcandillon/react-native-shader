@@ -7,17 +7,13 @@ const { width } = Dimensions.get('window');
 
 const hue = `
 void main() {
-  gl_FragColor = vec4(v_tex_coord.x, v_tex_coord.y, 0.5 + 0.5 * cos(u_time * 1000 / 500.0), 1.0);
+  gl_FragColor = vec4(v_tex_coord.x, v_tex_coord.y, blue, 1.0);
 }`;
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Shader
-        source={hue}
-        uniforms={{ blue: 0, opacity: 0.5 }}
-        style={styles.box}
-      />
+      <Shader source={hue} uniforms={{ blue: 1 }} style={styles.box} />
     </View>
   );
 }
