@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Dimensions } from 'react-native';
-import SkiaViewManager from 'react-native-shader';
+import Shader from 'react-native-shader';
 
 const { width } = Dimensions.get('window');
 
@@ -13,7 +13,7 @@ void main() {
 export default function App() {
   return (
     <View style={styles.container}>
-      <SkiaViewManager
+      <Shader
         source={hue}
         uniforms={{ blue: 0, opacity: 0.5 }}
         style={styles.box}
