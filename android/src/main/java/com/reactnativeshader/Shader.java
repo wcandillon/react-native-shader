@@ -101,15 +101,13 @@ public class Shader {
       ReadableMapKeySetIterator it = mUniforms.keySetIterator();
       while(it.hasNextKey()) {
         String key = it.nextKey();
-        if (mUniforms != null) {
           ReadableType type = mUniforms.getType(key);
           int handle = GLES20.glGetUniformLocation(mProgram, key);
           switch (type) {
             case Number:
-              GLES20.glUniform1f(handle, (float)mUniforms.getDouble(key));
+              GLES20.glUniform1f(handle, (float) mUniforms.getDouble(key));
               break;
           }
-        }
       }
     }
 

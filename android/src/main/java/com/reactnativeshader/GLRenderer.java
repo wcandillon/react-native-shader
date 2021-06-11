@@ -39,6 +39,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     // Set the background frame color
     GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     mShader = new Shader(mSource);
+    if (mUniforms != null) {
+      mShader.setUniforms(mUniforms);
+    }
 
   }
   @Override
