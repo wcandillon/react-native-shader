@@ -7,6 +7,11 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import android.opengl.GLES20;
+
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
+
 /**
  * A two-dimensional triangle for use as a drawn object in OpenGL ES 2.0.
  */
@@ -21,6 +26,7 @@ public class Shader {
 
   private final int mProgram;
   private int mPositionHandle;
+  private ReadableMap mUniforms = null;
 
   private FloatBuffer vertexBuffer;
   private ShortBuffer drawListBuffer;
@@ -34,6 +40,10 @@ public class Shader {
 
   private short drawOrder[] = { 0, 1, 2, 0, 2, 3 }; // order to draw vertices
   private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
+
+  void setUniforms(ReadableMap uniforms) {
+    mUniforms = uniforms;
+  }
 
   /**
    * Sets up the drawing object data for use in an OpenGL ES context.
@@ -86,6 +96,22 @@ public class Shader {
       mPositionHandle, COORDS_PER_VERTEX,
       GLES20.GL_FLOAT, false,
       vertexStride, vertexBuffer);
+
+    if (mUniforms != null) {
+      ReadableMapKeySetIterator it = mUniforms.keySetIterator();
+      while(it.hasNextKey()) {
+        String key = it.nextKey();
+        if (mUniforms != null) {
+          ReadableType type = mUniforms.getType(key);
+          int handle = GLES20.glGetUniformLocation(mProgram, key);
+          switch (type) {
+            case Number:
+              GLES20.glUniform1f(handle, (float)mUniforms.getDouble(key));
+              break;
+          }
+        }
+      }
+    }
 
     // Draw the square
     GLES20.glDrawElements(

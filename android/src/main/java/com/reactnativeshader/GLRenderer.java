@@ -5,6 +5,9 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
+
+import com.facebook.react.bridge.ReadableMap;
+
 /**
  * Provides drawing instructions for a GLSurfaceView object. This class
  * must override the OpenGL ES drawing lifecycle methods:
@@ -16,11 +19,19 @@ import android.util.Log;
  */
 public class GLRenderer implements GLSurfaceView.Renderer {
   private static final String TAG = "GLRenderer";
-  private Shader mShader;
-  private String mSource;
+  private  Shader mShader;
+  private final String mSource;
+  private ReadableMap mUniforms;
 
   GLRenderer(String source){
     mSource = source;
+  }
+
+  void setUniforms(ReadableMap uniforms) {
+    mUniforms = uniforms;
+    if (mShader != null) {
+      mShader.setUniforms(uniforms);
+    }
   }
 
   @Override
@@ -28,6 +39,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     // Set the background frame color
     GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     mShader = new Shader(mSource);
+
   }
   @Override
   public void onDrawFrame(GL10 unused) {

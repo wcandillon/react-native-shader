@@ -8,7 +8,6 @@ import com.facebook.react.bridge.ReadableMap;
 public class ShaderView extends GLSurfaceView {
 
   private GLRenderer renderer;
-  private ReadableMap uniforms;
 
   public void setSource(String source) {
     renderer = new GLRenderer(source);
@@ -17,7 +16,9 @@ public class ShaderView extends GLSurfaceView {
   }
 
   public void setUniforms(ReadableMap uniforms) {
-    this.uniforms = uniforms;
+    if (renderer != null) {
+      renderer.setUniforms(uniforms);
+    }
   }
 
   public ShaderView(Context context) {
