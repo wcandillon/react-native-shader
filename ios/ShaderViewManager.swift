@@ -27,7 +27,7 @@ class ShaderView : SKView {
         }
     }
     
-    @objc var uniforms: Dictionary<String, Float> = [:]
+    @objc var uniforms: Dictionary<String, NSNumber> = [:]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +44,7 @@ class ShaderView : SKView {
             let shader = SKShader(source: self.source);
 
             for (key, value) in self.uniforms {
-                shader.uniforms.append(SKUniform(name: key, float: value));
+                shader.uniforms.append(SKUniform(name: key, float: value.floatValue));
             }
             scene.shader = shader;
             self.presentScene(scene);
