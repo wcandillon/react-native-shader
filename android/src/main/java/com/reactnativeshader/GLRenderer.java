@@ -4,7 +4,6 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
 import android.util.Log;
 /**
  * Provides drawing instructions for a GLSurfaceView object. This class
@@ -16,25 +15,18 @@ import android.util.Log;
  * </ul>
  */
 public class GLRenderer implements GLSurfaceView.Renderer {
-  private static final String TAG = "MyGLRenderer";
-  private Triangle mTriangle;
+  private static final String TAG = "GLRenderer";
+  private Shader mShader;
   @Override
   public void onSurfaceCreated(GL10 unused, EGLConfig config) {
     // Set the background frame color
     GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    mTriangle = new Triangle();
+    mShader = new Shader();
   }
   @Override
   public void onDrawFrame(GL10 unused) {
-    float[] scratch = new float[16];
-    // Draw background color
     GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-    // Set the camera position (View matrix)
-    // Combine the rotation matrix with the projection and camera view
-    // Note that the mMVPMatrix factor *must be first* in order
-    // for the matrix multiplication product to be correct.
-    // Draw triangle
-    mTriangle.draw(scratch);
+    mShader.draw();
   }
 
   @Override

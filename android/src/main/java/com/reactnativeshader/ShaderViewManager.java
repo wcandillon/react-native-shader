@@ -26,12 +26,12 @@ public class ShaderViewManager extends SimpleViewManager<ShaderView> {
     }
 
     @ReactProp(name = "shader")
-    public void setShader(View view, String shader) {
-      //view.setBackgroundColor(Color.parseColor("red"));
+    public void setShader(ShaderView view, String shader) {
+      //view.setShader(shader);
     }
 
     @ReactProp(name = "uniforms")
-    public void setUniforms(View view, ReadableMap uniforms) {
-        //view.setBackgroundColor(Color.parseColor("red"));
+    public void setUniforms(ShaderView view, ReadableMap uniforms) {
+      //view.setUniforms(uniforms);
     }
 }
