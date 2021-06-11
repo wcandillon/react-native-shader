@@ -30,11 +30,12 @@ class ShaderView : SKView {
     @objc var uniforms: Dictionary<String, NSNumber> = [:] {
         didSet {
             if (self.scene != nil) {
-                
                 for (key, value) in self.uniforms {
-                    self.shaderScene?.shader?.uniforms.append(SKUniform(name: key, float: value.floatValue));
+                    let u = self.shaderScene?.shader?.uniforms.filter({
+                        $0.name == key
+                    }).first;
+                    u?.floatValue = value.floatValue;
                 }
-                self.presentScene(self.shaderScene);
             }
         }
     }
