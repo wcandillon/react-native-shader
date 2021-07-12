@@ -2,6 +2,8 @@
 
 React Native Shader Library
 
+⚠️ This is a toy module, you can play with it but it cannot do much at the moment ⚠️
+
 ## Installation
 
 ```sh
