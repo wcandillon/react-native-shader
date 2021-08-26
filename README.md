@@ -2,7 +2,7 @@
 
 React Native Shader Library
 
-⚠️ This is a toy module, you can play with it but it cannot do much at the moment ⚠️
+⚠️ **DOT NOT USE THIS. We have something much better in the oven for you.** ⚠️
 
 ## Installation
 
