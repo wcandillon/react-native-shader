@@ -2,7 +2,7 @@
 
 React Native Shader Library
 
-⚠️ **DOT NOT USE THIS.** We have [something much better in the oven for you](https://www.youtube.com/watch?v=AxLmUsJAH7c)
+⚠️ **DOT NOT USE THIS.** Check out [react-native-skia](https://shopify.github.io/react-native-skia/).
 
 ## Installation
 
